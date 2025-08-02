@@ -4,13 +4,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine, text
 
 
-
-# 📋 Lista de certificaciones de celulares
-certificaciones = [
-    "FCC", "CE", "PTCRB", "CCC", "IC",
-    "NOM", "SUTEL", "JATE", "BIS", "ANATEL"
-]
-
 # Configuración de conexión
 driver = 'ODBC Driver 17 for SQL Server'
 server = 'FA-NEW'
@@ -45,15 +38,21 @@ try:
     # """)
     # conn.commit()
 
+    # # 📋 Lista de certificaciones de celulares
+    # certificaciones = [
+    #     "FCC", "CE", "PTCRB", "CCC", "IC",
+    #     "NOM", "SUTEL", "JATE", "BIS", "ANATEL"
+    # ]
+
     # 🚀 Insertar datos
-    for idx, tipo in enumerate(certificaciones, start=1):
-        cursor.execute("""
-            IF NOT EXISTS (
-                SELECT 1 FROM Certificaciones WHERE id_Certificacion = ?
-            )
-            INSERT INTO Certificaciones (id_Certificacion, TipoCertificacion)
-            VALUES (?, ?)
-        """, idx, idx, tipo)
+    # for idx, tipo in enumerate(certificaciones, start=1):
+    #     cursor.execute("""
+    #         IF NOT EXISTS (
+    #             SELECT 1 FROM Certificaciones WHERE id_Certificacion = ?
+    #         )
+    #         INSERT INTO Certificaciones (id_Certificacion, TipoCertificacion)
+    #         VALUES (?, ?)
+    #     """, idx, idx, tipo)
 
     conn.commit()
     print("✅ Certificaciones insertadas correctamente.")
@@ -67,5 +66,14 @@ finally:
     if 'conn' in locals():
         conn.close()
 
-# =====================================  SEGUNDA TABLA A POBLAR =====================================
+# =====================================  SEGUNDA TABLA A POBLAR Categorias =====================================
+# '''
+# DIRECTAMENTE EN SQL
+
+# insert into Categorias(id_Categoria,NombreCategoria)
+# values(1,'Gama Baja'),
+# 	  (2,'Gama Media'),
+#       (3,'Gama Alta'),
+# 	  (4,'Gama premium/flagshi')
+# '''
 
